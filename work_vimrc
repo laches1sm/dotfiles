@@ -1,0 +1,74 @@
+set termguicolors
+execute pathogen#infect()
+syntax on
+if has('python3')
+  silent! python3 1
+endif
+
+set term=xterm-256color-italic
+filetype plugin indent on
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = '|'
+let g:airline#extensions#tabline#formatter = 'default'
+let g:airline_theme='fairyfloss'
+let g:ale_fix_on_save = 1
+let g:ale_sign_column_always = 1
+let g:ale_linters = {
+\   'python': ['flake8'],
+\}
+highlight Comment cterm=italic
+highlight Function cterm=italic
+highlight Statement cterm=italic
+map <Leader>n :NERDTreeToggle<CR>
+map <Leader>gt :GoTest<CR>
+map <Leader>gb :GoBuild<CR>
+map <Leader>gtf :GoTestFunc<CR>
+map <Leader>t :TagsGenerate!<CR>
+map <Leader>m :call ToggleMouse()<CR>
+set expandtab
+set hlsearch
+set incsearch
+set showmode
+set nowrap
+set shiftwidth=4
+set softtabstop=4
+set autoindent
+set cursorline
+set mouse=n
+set number
+set history=1000
+set clipboard=unnamedplus,autoselect
+set completeopt=menuone,menu,longest
+set backspace=indent,eol,start
+set encoding=utf-8
+set t_Co=256
+set cmdheight=1
+set fillchars+=stl:\ ,stlnc:\
+nnoremap <leader><space> :nohlsearch<CR>
+nnoremap <space> zz
+nnoremap n nzzzv
+nnoremap N Nzzzv
+nnoremap <leader>q :qa<CR>
+nnoremap <leader>w :w<CR>
+nnoremap <leader>wq :wqa<CR>
+nnoremap g= mmgg=G`m
+nnoremap gQ mmgggqG`m
+nnoremap <leader>ga :Git add %:p<CR><CR>
+nnoremap <leader>gs :Gstatus<CR>
+nnoremap <leader>gp :Gpush<CR>
+nnoremap <leader>gb :Gblame<CR>
+
+nnoremap <Leader>mt :! make test<CR>
+nnoremap <Leader>mb :! make build<CR>
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+let g:user_emmet_leader_key='<Tab>'
+let g:user_emmet_settings = {
+  \  'javascript.jsx' : {
+    \      'extends' : 'jsx',
+    \  },
+  \}
+autocmd BufWritePost *.js AsyncRun -post=checktime ./node_modules/.bin/eslint --fix %
+
+
