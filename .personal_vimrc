@@ -1,0 +1,91 @@
+set termguicolors                            			" true color outside tmux
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'w0rp/ale'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+Plugin 'nvie/vim-flake8'
+Plugin 'scrooloose/nerdtree'
+Plugin 'tpope/vim-fugitive'
+Plugin 'takac/vim-commandcaps'
+Plugin 'Xuyuanp/nerdtree-git-plugin', { 'on': 'NERDTreeToggle' }
+Plugin 'godlygeek/tabular'
+Plugin 'fatih/vim-go'
+Plugin 'tveskag/nvim-blame-line'
+
+let g:airline_theme='solarized'
+let g:airline#extensions#ale#enabled = 1
+let g:ale_echo_msg_error_str = 'E'
+let g:ale_echo_msg_warning_str = 'W'
+let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+
+let g:ale_linters = {
+\   'go': ['gofmt'],
+\   'python': ['flake8'],
+\
+\}
+
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+"
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line
+set ignorecase
+
+set scrolloff=8                                                 " keep cursor 8 lines from the top and bottom of the screen
+set autoread
+set autochdir                                                   " set working directory to current file
+set relativenumber number                                       " hybrid numbering mdoe
+set showcmd                                                     " show command in bottom bar
+                                                                " set cursorline          " highlight current line
+set wildmenu                                                    " visual autocompleme for command menu
+set wildmode=list:full
+set lazyredraw                                                  " redraw only when we need to.
+set showmatch                                                   " highlight matching [{()}]
+set title                                                       " show file path of current file in window title
+set hidden                                                      " allow edited buffers to hide
+set foldmethod=syntax
+set foldlevelstart=999                                          " 0 is all closed, 1 is some closed
+set encoding=UTF-8
+set noswapfile
+set nobackup
+set nowb
+set autoindent
+set smartindent
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
+let g:go_fmt_command = "goimports"
+let g:go_fmt_fail_silently = 0
+let g:go_fmt_command = "goimports"
+let g:go_autodetect_gopath = 1
+let g:go_term_enabled = 1
+let g:go_highlight_space_tab_error = 1
+let g:go_highlight_array_whitespace_error = 1
+let g:go_highlight_trailing_whitespace_error = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
